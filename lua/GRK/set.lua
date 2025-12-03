@@ -30,3 +30,8 @@ vim.api.nvim_create_autocmd("TabEnter", {
   command = "redraw!",
 })
 vim.opt.winbar = nil
+
+vim.opt.expandtab = true -- use spaces
+vim.opt.shiftwidth = 2 -- indent width
+vim.opt.tabstop = 2 -- tab width
+vim.o.clipboard = "unnamedplus"

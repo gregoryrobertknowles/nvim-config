@@ -34,3 +34,11 @@ vim.keymap.set("n", "<leader>h", ":noh<CR>", { silent = true })
 vim.keymap.set("n", "<Tab>", "<Cmd>BufferNext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>x", "<Cmd>BufferClose<CR>", { desc = "Close buffer" })
+
+vim.keymap.set("n", "<leader>d", function()
+  vim.diagnostic.open_float(nil, {
+    scope = "buffer",
+    border = "rounded",
+    source = "always",
+  })
+end, { desc = "Show all diagnostics" })

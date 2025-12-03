@@ -1,0 +1,7 @@
+ few things i need to add
+ JS, TS, CSS
+ C++
+ Rust
+ to LSP config
+
+ indentation lines:
