@@ -15,6 +15,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
       highlight NvimTreeNormal guibg=none
       highlight NvimTreeNormalNC guibg=none
       highlight NvimTreeEndOfBuffer guibg=none 
+      highlight TroubleNormal guibg=NONE
+      highlight TroubleNormalNC guibg=NONE
+
+      highlight NormalFloat guibg=NONE
+      highlight FloatBorder guibg=NONE
     ]])
   end,
 })
