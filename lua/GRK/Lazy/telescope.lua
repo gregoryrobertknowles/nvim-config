@@ -1,16 +1,23 @@
 return {
   "nvim-telescope/telescope.nvim",
   branch = "master",
+  cmd = "Telescope",
+  keys = { "<leader>ff", "<leader>fg", "<C-p>", "<leader>pws", "<leader>pWs", "<leader>ps", "<leader>vh" },
 
   dependencies = {
     "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
 
   config = function()
-    require("telescope").setup({})
+    require("telescope").setup({
+      extensions = { fzf = {} },
+    })
+    require("telescope").load_extension("fzf")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+    vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
     vim.keymap.set("n", "<C-p>", builtin.git_files, {})
     vim.keymap.set("n", "<leader>pws", function()
       local word = vim.fn.expand("<cword>")

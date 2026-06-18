@@ -6,6 +6,8 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
   },
@@ -13,8 +15,12 @@ return {
   config = function()
     -- Mason setup
     require("mason").setup()
-    require("mason-lspconfig").setup({
+    -- Broadcast nvim-cmp capabilities to all servers (v2: handlers table is gone)
+    vim.lsp.config("*", {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
 
+    require("mason-lspconfig").setup({
       ensure_installed = {
         "pyright",
         "lua_ls",
@@ -25,16 +31,12 @@ return {
         "cssls",
         "tailwindcss",
       },
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          })
-        end,
+      -- Don't start the ruff LSP; linting is handled by nvim-lint (lowercase "ruff")
+      automatic_enable = {
+        exclude = { "ruff" },
       },
     })
 
-    local lspconfig = require("lspconfig")
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
@@ -73,6 +75,8 @@ return {
       sources = {
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
       },
     })
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")

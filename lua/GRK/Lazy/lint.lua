@@ -8,7 +8,7 @@ return {
     lint.linters.ruff.args = {
       "check",
       "--select=N,E,F,W", -- Naming, Errors, Pyflakes, Warnings
-      "--ignore=E501, N817",
+      "--ignore=E501,N817,N802,E731,N806,N803",
       "--output-format=json",
       "--stdin-filename",
       function()
@@ -21,7 +21,7 @@ return {
       python = { "ruff" },
     }
 
-    vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "InsertLeave" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
       callback = function()
         lint.try_lint()
       end,
