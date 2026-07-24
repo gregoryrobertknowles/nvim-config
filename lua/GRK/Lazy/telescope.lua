@@ -6,14 +6,19 @@ return {
 
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = vim.fn.has("win32") == 1 and "mingw32-make" or "make",
+    },
   },
 
   config = function()
     require("telescope").setup({
       extensions = { fzf = {} },
     })
-    require("telescope").load_extension("fzf")
+    -- fzf-native is optional: if its native build is missing, fall back to the
+    -- default sorter instead of aborting the whole telescope config
+    pcall(require("telescope").load_extension, "fzf")
 
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
