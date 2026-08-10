@@ -30,6 +30,7 @@ return {
         "html",
         "cssls",
         "tailwindcss",
+        "tinymist",
       },
       -- Don't start the ruff LSP; linting is handled by nvim-lint (lowercase "ruff")
       automatic_enable = {
